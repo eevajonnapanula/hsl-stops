@@ -2,15 +2,15 @@ import styled, {keyframes} from 'styled-components'
 
 const changeColor = keyframes`
   0% {
-    color: white;
+    color: rgb(255,255,255);
   }
 
   50% {
-    color: blue;
+    color: rgb(240,146,205);
   }
 
   100% {
-    color: white;
+    color: rgb(255,255,255);
   }
 `;
 
@@ -92,5 +92,5 @@ export const StopWrapper = styled.div`
   mergin-bottom: 1em;
   color: white;
   margin-top: 1em;
-  background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.7)"};
+  background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.8)"};
 `
