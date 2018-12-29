@@ -19,10 +19,14 @@ const Stops = ({queryString}) => (
             realtime
             serviceDay
             headsign
+            trip {
+              routeShortName
+            }
           }
         }
       }
     `}
+    pollInterval={15000}
   >
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
