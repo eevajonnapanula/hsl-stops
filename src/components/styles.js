@@ -2,7 +2,7 @@ import styled, {keyframes} from 'styled-components'
 
 const changeColor = keyframes`
   0% {
-    color: red;
+    color: white;
   }
 
   50% {
@@ -10,7 +10,7 @@ const changeColor = keyframes`
   }
 
   100% {
-    color: red;
+    color: white;
   }
 `;
 
@@ -38,32 +38,34 @@ export const Header = styled.div`
   border-radius: 0.5em;
   display: flex;
   justify-content: flex-start;
-  margin-top: 1em;
-  margin-left: 1.5em;
+  padding-left: 1.5em;
+  background-color: ${props => props.color};
 `
 
-export const StopsWrapper = styled.div`
+export const StopTimesWrapper = styled.div`
   border-radius: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 0.5em;
   mergin-bottom: 1em;
+  color: white;
 `
 export const Time = styled.span`
   margin-right: 1em;
-  color: red;
+  width: 1em;
 `
 export const AnimatedTime = styled.span`
   margin-right: 1em;
   animation: ${changeColor} 10s linear infinite;
 `
 export const Headsign = styled.span`
-  color: brown;
+
 `
 
 export const ColoredIcon = styled.span`
   color: ${props => props.color};
-  padding-left: 0.5em;
+  padding-right: 0.5em;
 `
 export const Wrapper = styled.div`
   width: 75%;
@@ -80,4 +82,15 @@ export const Stoptime = styled.div`
   margin-bottom: 0.25em;
   margin-left: 0.5em;
   margin-right: 0.5em;
+`
+
+export const StopWrapper = styled.div`
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  mergin-bottom: 1em;
+  color: white;
+  margin-top: 1em;
+  background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.7)"};
 `
