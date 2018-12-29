@@ -3,7 +3,8 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Stops from './components/stops';
 import Input from './components/input';
-import { Wrapper } from './components/styles'
+import { Wrapper } from './components/styles';
+
 const client = new ApolloClient({
   uri: "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql"
 });

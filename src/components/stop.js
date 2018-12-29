@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Stoptime, ColoredIcon, Header, StopsWrapper, Headsign } from './styles';
+import { Stoptime, ColoredIcon, Header, StopTimesWrapper, Headsign, StopWrapper } from './styles';
 import { H2 } from './typography';
 import { FaTrain, FaBus, FaSubway, FaCat, FaShip } from 'react-icons/fa';
 import TimeWrapper from './time';
@@ -8,46 +8,57 @@ import TimeWrapper from './time';
 const mapping = {
   'FERRY': {
     component: <FaShip />,
-  color: '#00B9E4'
+  color: 'rgba(0,185,228,1)'
 },
   'RAIL': {
     component: <FaTrain />,
-  color: '#8C4799'
+  color: 'rgba(140,71,153,1)'
 },
   'BUS': {
     component: <FaBus />,
-  color: '#007AC9'
+  color: 'rgba(0,122,201,1)'
 },
   'SUBWAY': {
     component: <FaSubway />,
-  color: '#FF6319',
+  color: 'rgba(255,99,25,1)',
 },
   'TRAM':  {
     component: <FaCat />,
-  color: '#00985F'
+  color: 'rgba(0,152,95,1)'
   },
 }
 
+const getTimeInMinutes = (stoptime) => {
+  return moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).diff(moment(), 'minutes');
+}
+
+const getFormattedTime = (stoptime) => {
+  return moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).format('HH:mm')
+}
+
 const Stop = ({stop}) => (
-  <div>
-    <Header>
+  <StopWrapper color={mapping[stop.vehicleMode].color}>
+    <Header color={mapping[stop.vehicleMode].color}>
       <H2>
-        {stop.name}
         <ColoredIcon
-          color={mapping[stop.vehicleMode].color}>
+          color="white">
            {mapping[stop.vehicleMode].component}
         </ColoredIcon>
+        {stop.name}
       </H2>
     </Header>
-    <StopsWrapper>
-      {stop.stoptimesWithoutPatterns.map(stoptime => (
-        <Stoptime>
-          <TimeWrapper animated={stoptime.realtime} time={moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).format('HH:mm')} />
-          <Headsign>{stoptime.headsign}</Headsign>
+    <StopTimesWrapper>
+      {stop.stoptimesWithoutPatterns.map((stoptime, i) => (
+        <Stoptime key={i}>
+          <TimeWrapper
+            animated={stoptime.realtime}
+            time={getTimeInMinutes(stoptime) < 10 ? getTimeInMinutes(stoptime) + ' min' : getFormattedTime(stoptime) }
+            />
+          <Headsign>{stoptime.trip.routeShortName} {stoptime.headsign}</Headsign>
         </Stoptime>
       ))}
-    </StopsWrapper>
-  </div>
+    </StopTimesWrapper>
+  </StopWrapper>
 );
 
 export default Stop;
