@@ -53,7 +53,7 @@ export const StopTimesWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 0.5em;
-  mergin-bottom: 1em;
+  margin-bottom: 1em;
   color: white;
 `
 export const Time = styled.span`
@@ -96,9 +96,16 @@ export const StopWrapper = styled.div`
   justify-content: space-around;
   mergin-bottom: 1em;
   color: white;
-  width: 22.5em;
   margin-top: 1em;
   background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.8)"};
+
+  @media (max-width: 480px) {
+    width: 17.5em;
+  }
+
+  @media (min-width: 480px) {
+    width: 22.5em;
+  }
 `
 
 export const ListContainer = styled.div`
