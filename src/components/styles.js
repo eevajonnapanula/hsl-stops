@@ -24,6 +24,7 @@ export const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 `
 
 export const StyledInput = styled.input`
@@ -35,7 +36,8 @@ export const StyledInput = styled.input`
 `
 
 export const Header = styled.div`
-  border-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
   display: flex;
   justify-content: flex-start;
   padding-left: 1.5em;
@@ -91,6 +93,7 @@ export const StopWrapper = styled.div`
   justify-content: space-around;
   mergin-bottom: 1em;
   color: white;
+  min-width: 30%;
   margin-top: 1em;
   background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.8)"};
 `
