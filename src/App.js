@@ -19,7 +19,7 @@ class App extends Component {
       lon: 24.936,
       radius: 500,
     },
-    isLocation: true
+    isLocation: false
   }
 
   handleInputChange = (changed) => {
@@ -34,6 +34,7 @@ class App extends Component {
   handleAddressChange = (input) => {
     const radius = this.state.coordinates.radius;
     this.setState({
+      isLocation: true,
       coordinates: {
         lat: input.lat,
         lon: input.lon,
