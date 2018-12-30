@@ -14,7 +14,6 @@ const changeColor = keyframes`
   }
 `;
 
-
 export const RowDiv = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,14 +28,14 @@ export const ColumnDiv = styled.div`
 `
 
 export const StyledInput = styled.input.attrs({
-    placeholder: 'Search for a stop'
+    placeholder: props => props.placeholder || ''
   })`
 
   border: 1px solid black;
   padding: 1em;
   border-radius: 0.5em;
   margin: 0.5em;
-  min-width: 20em;
+  width: 20em;
 `
 
 export const Header = styled.div`
@@ -97,7 +96,35 @@ export const StopWrapper = styled.div`
   justify-content: space-around;
   mergin-bottom: 1em;
   color: white;
-  min-width: 20em;
+  width: 22.5em;
   margin-top: 1em;
   background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.8)"};
+`
+
+export const ListContainer = styled.div`
+  display: ${props => props.visible ? 'flex' : 'none'};
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 0.5em;
+  width: 25em;
+`
+
+export const ListItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 1px solid black;
+  width: 100%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  :last-child {
+    border-bottom: none;
+  }
+`
+export const AddressSearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

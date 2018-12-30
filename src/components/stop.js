@@ -36,7 +36,7 @@ const getFormattedTime = (stoptime) => {
   return moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).format('HH:mm')
 }
 
-const Stop = ({stop}) => (
+const Stop = ({stop, distance}) => (
   <StopWrapper color={mapping[stop.vehicleMode].color}>
     <Header color={mapping[stop.vehicleMode].color}>
       <H2>
@@ -45,6 +45,7 @@ const Stop = ({stop}) => (
            {mapping[stop.vehicleMode].component}
         </ColoredIcon>
         {stop.name}
+        {distance && ` ${distance} m`} 
       </H2>
     </Header>
     <StopTimesWrapper>
