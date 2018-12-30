@@ -114,7 +114,13 @@ export const ListContainer = styled.div`
   align-items: center;
   border: 1px solid black;
   border-radius: 0.5em;
-  width: 25em;
+  @media (max-width: 480px) {
+    width: 18em;
+  }
+
+  @media (min-width: 480px) {
+    width: 25em;
+  }
 `
 
 export const ListItem = styled.div`
