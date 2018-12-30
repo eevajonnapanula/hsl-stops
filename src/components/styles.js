@@ -23,16 +23,20 @@ export const RowDiv = styled.div`
 export const ColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
   width: 100%;
+
 `
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input.attrs({
+    placeholder: 'Search for a stop'
+  })`
+
   border: 1px solid black;
   padding: 1em;
   border-radius: 0.5em;
-  width: 90%;
   margin: 0.5em;
+  min-width: 20em;
 `
 
 export const Header = styled.div`
@@ -70,7 +74,7 @@ export const ColoredIcon = styled.span`
   padding-right: 0.5em;
 `
 export const Wrapper = styled.div`
-  width: 75%;
+  width: 100%;
   font-family: 'Roboto', sans-serif;
   flex-direction: column;
   display: flex;
@@ -93,7 +97,7 @@ export const StopWrapper = styled.div`
   justify-content: space-around;
   mergin-bottom: 1em;
   color: white;
-  min-width: 30%;
+  min-width: 20em;
   margin-top: 1em;
   background-color: ${props => props.color.substring(0,props.color.length - 3) + ",0.8)"};
 `
