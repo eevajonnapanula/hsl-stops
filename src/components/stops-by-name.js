@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import Stop from './stop';
-import { ColumnDiv } from './styles';
+import { ColumnDiv, Text } from './styles';
 import { stopsByName } from './queries';
 
 
@@ -16,9 +16,23 @@ const StopsByName = ({queryString}) => {
     pollInterval={15000}
   >
     {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
-      return (<ColumnDiv>{data.stops.map(stop => (<Stop key={stop.gtfsId} stop={stop} />))}</ColumnDiv>);
+      if (loading) return <Text>Loading...</Text>;
+      if (error) return <Text>Error :(</Text>;
+      return (
+        <ColumnDiv>
+          {data.stops.length > 0 ?
+            <div>
+              { data.stops.map((stop) =>
+                (
+                  <Stop key={stop.gtfsId} stop={stop} />)
+                )
+              }
+            </div> :
+            <Text>
+              No results found :(
+            </Text>
+          }
+        </ColumnDiv>);
     }}
   </Query>
 )};

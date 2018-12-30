@@ -128,3 +128,7 @@ export const AddressSearchContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `
+
+export const Text = styled.p`
+  padding: 1em;
+`

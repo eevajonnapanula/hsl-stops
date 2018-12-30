@@ -4,9 +4,11 @@ A React app to show when vehicle arrives on HSL-stop. It uses [Digitransit Routi
 
 ## Demo
 
-Demo is live in [https://hsl-stops.netlify.com/](https://hsl-stops.netlify.com/).
+Demo is live in [https://hsl-stops.netlify.com/](https://hsl-stops.netlify.com/)
 
 ## Planned TODO
-- [ ] Finish with sites appearance
+- [ ] Finish with site's appearance
 - [ ] Get nearest stops
-- [ ] "No results" -text
+    - [x] Get by address
+    - [ ] Add possibility to change radius
+- [x] "No results" -text
