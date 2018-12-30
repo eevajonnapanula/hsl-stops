@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import Stops from './components/stops';
+import StopsByName from './components/stops-by-name';
+import StopsByLocation from './components/stops-by-location';
 import Input from './components/input';
 import { Wrapper } from './components/styles';
 
@@ -11,13 +12,20 @@ const client = new ApolloClient({
 
 class App extends Component {
   state = {
-    queryString: ''
+    queryString: '',
+    coordinates: {
+      lat: 60.170,
+      lon: 24.936,
+      radius: 500,
+    },
+    isLocation: true
   }
 
   handleInputChange = (changed) => {
     if (changed.length > 2) {
       this.setState({
-        queryString: changed
+        queryString: changed,
+        isLocation: false
       })
     }
   }
@@ -27,7 +35,9 @@ class App extends Component {
       <ApolloProvider client={client}>
         <Wrapper>
           <Input handleChange={this.handleInputChange} />
-          <Stops queryString={this.state.queryString} />
+          {this.state.isLocation ?
+            <StopsByLocation coordinates={this.state.coordinates} /> :
+            <StopsByName queryString={this.state.queryString} /> }
         </Wrapper>
       </ApolloProvider>
     )}
