@@ -24,7 +24,6 @@ export const ColumnDiv = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-
 `
 
 export const StyledInput = styled.input`
@@ -146,6 +145,7 @@ export const ListItem = styled.div`
     border-bottom: none;
   }
 `
+
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
