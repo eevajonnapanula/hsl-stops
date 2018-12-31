@@ -7,6 +7,7 @@ class AddressSearch extends React.Component {
   state = {
     suggestions: [],
     queryString: '',
+    radius: 500,
   }
 
   handleAddressChange = async () => {
@@ -20,9 +21,9 @@ class AddressSearch extends React.Component {
     }
   }
 
-  handleChange = (value) => {
+  handleChange = (key, value) => {
     this.setState({
-      queryString: value
+      [key]: value,
     })
   }
 
@@ -35,7 +36,8 @@ class AddressSearch extends React.Component {
   handleClick = (suggestion) => {
     this.props.handleChange({
       lon: suggestion.geometry.coordinates[0],
-      lat: suggestion.geometry.coordinates[1]
+      lat: suggestion.geometry.coordinates[1],
+      radius: this.state.radius
     })
     this.setState({suggestions: [], queryString: ''})
   }
@@ -46,10 +48,22 @@ class AddressSearch extends React.Component {
         <h5>Search by address</h5>
         <StyledInput
           value={this.state.queryString}
-          onChange={(e) => this.handleChange(e.target.value)}
+          onChange={(e) => this.handleChange('queryString', e.target.value)}
           placeholder="Type an address"
           onKeyPress={(e) => this.handleKeyPress(e)}
         />
+      <div>
+        <span>Change radius</span>
+        <StyledInput
+          placeholder="500"
+          width="5em"
+          type="number"
+          value={this.state.radius}
+          onChange={(e) => this.handleChange('radius', e.target.value)}
+          onKeyPress={(e) => this.handleKeyPress(e)}
+          />
+        <span>m</span>
+      </div>
         <ListContainer visible={this.state.suggestions.length > 0}>
           { this.state.suggestions.map(suggestion => (
               <ListItem
