@@ -8,6 +8,7 @@ class AddressSearch extends React.Component {
     suggestions: [],
     queryString: '',
     radius: 500,
+    pose: 'closed'
   }
 
   handleAddressChange = async () => {
@@ -16,7 +17,8 @@ class AddressSearch extends React.Component {
       const res = await getJSON(url);
 
       this.setState({
-        suggestions: res.features
+        suggestions: res.features,
+        pose: 'open'
       })
     }
   }
@@ -29,6 +31,7 @@ class AddressSearch extends React.Component {
 
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
+      this.setState({pose: 'closed'})
       this.handleAddressChange()
     }
   }
@@ -39,7 +42,7 @@ class AddressSearch extends React.Component {
       lat: suggestion.geometry.coordinates[1],
       radius: this.state.radius
     })
-    this.setState({suggestions: [], queryString: ''})
+    this.setState({suggestions: [], queryString: '', pose: 'closed'})
   }
 
   render() {
@@ -64,7 +67,7 @@ class AddressSearch extends React.Component {
           />
         <span>m</span>
       </div>
-        <ListContainer visible={this.state.suggestions.length > 0}>
+        <ListContainer visible={this.state.suggestions.length > 0} pose={this.state.pose}>
           { this.state.suggestions.map(suggestion => (
               <ListItem
                 key={suggestion.properties.id}
