@@ -9,14 +9,26 @@ class AddressSearch extends React.Component {
     queryString: '',
   }
 
-  handleAddressChange = async (e) => {
-    if (e.length > 2) {
-      const url = `https://api.digitransit.fi/geocoding/v1/autocomplete?text=${e}&focus.point.lat=60.17&focus.point.lon=24.93`;
+  handleAddressChange = async () => {
+    if (this.state.queryString.length > 2) {
+      const url = `https://api.digitransit.fi/geocoding/v1/autocomplete?text=${this.state.queryString}&focus.point.lat=60.17&focus.point.lon=24.93`;
       const res = await getJSON(url);
 
       this.setState({
         suggestions: res.features
       })
+    }
+  }
+
+  handleChange = (value) => {
+    this.setState({
+      queryString: value
+    })
+  }
+
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.handleAddressChange()
     }
   }
 
@@ -31,7 +43,12 @@ class AddressSearch extends React.Component {
   render() {
     return (
       <AddressSearchContainer>
-        <StyledInput onBlur={(e) => this.handleAddressChange(e.target.value)} placeholder="Type an address" />
+        <StyledInput
+          value={this.state.queryString}
+          onChange={(e) => this.handleChange(e.target.value)}
+          placeholder="Type an address"
+          onKeyPress={(e) => this.handleKeyPress(e)}
+        />
         <ListContainer visible={this.state.suggestions.length > 0}>
           { this.state.suggestions.map(suggestion => (
               <ListItem
