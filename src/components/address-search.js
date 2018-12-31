@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledInput } from './styles';
 import { getJSON } from './networking';
-import { ListContainer, ListItem, AddressSearchContainer } from './styles';
+import { ListContainer, ListItem, SearchContainer } from './styles';
 
 class AddressSearch extends React.Component {
   state = {
@@ -42,7 +42,8 @@ class AddressSearch extends React.Component {
 
   render() {
     return (
-      <AddressSearchContainer>
+      <SearchContainer>
+        <h5>Search by address</h5>
         <StyledInput
           value={this.state.queryString}
           onChange={(e) => this.handleChange(e.target.value)}
@@ -59,7 +60,7 @@ class AddressSearch extends React.Component {
             )
           )}
         </ListContainer>
-      </AddressSearchContainer>
+      </SearchContainer>
     )
   }
 }
