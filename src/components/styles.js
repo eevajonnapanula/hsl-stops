@@ -1,4 +1,5 @@
 import styled, {keyframes} from 'styled-components'
+import posed from 'react-pose';
 
 const changeColor = keyframes`
   0% {
@@ -24,6 +25,7 @@ export const ColumnDiv = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+
 `
 
 export const StyledInput = styled.input`
@@ -117,7 +119,12 @@ export const StopWrapper = styled.div`
   }
 `
 
-export const ListContainer = styled.div`
+const List = posed.div({
+  open: { y: 0, opacity: 1, transition: { duration: 500 } },
+  closed: { y: -200, opacity: 0, transition: { duration: 1000 } }
+})
+
+export const ListContainer = styled(List)`
   display: ${props => props.visible ? 'flex' : 'none'};
   flex-direction: column;
   align-items: center;
@@ -131,8 +138,9 @@ export const ListContainer = styled.div`
     width: 25em;
   }
 `
+const Item = posed.div();
 
-export const ListItem = styled.div`
+export const ListItem = styled(Item)`
   display: flex;
   flex-direction: column;
   align-items: center;
