@@ -143,7 +143,6 @@ const Item = posed.div();
 export const ListItem = styled(Item)`
   display: flex;
   flex-direction: column;
-  align-items: center;
   border-bottom: 1px solid black;
   width: 100%;
   padding-top: 1em;
