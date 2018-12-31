@@ -8,7 +8,8 @@ Demo is live in [https://hsl-stops.netlify.com/](https://hsl-stops.netlify.com/)
 
 ## Planned TODO
 - [ ] Finish with site's appearance
-- [ ] Get nearest stops
-    - [x] Get by address
-    - [ ] Add possibility to change radius
-- [x] "No results" -text
+- [x] ~~Get nearest stops~~
+    - [x] ~~Get by address~~
+    - [x] ~~Add possibility to change radius~~
+- [x] ~~"No results" -text~~
+- [ ] Add some animations

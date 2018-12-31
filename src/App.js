@@ -31,13 +31,12 @@ class App extends Component {
   }
 
   handleAddressChange = (input) => {
-    const radius = this.state.coordinates.radius;
     this.setState({
       isLocation: true,
       coordinates: {
         lat: input.lat,
         lon: input.lon,
-        radius
+        radius: input.radius
       }
     })
   }

@@ -27,20 +27,17 @@ export const ColumnDiv = styled.div`
 
 `
 
-export const StyledInput = styled.input.attrs({
-    placeholder: props => props.placeholder || ''
-  })`
-
+export const StyledInput = styled.input`
   border: 1px solid black;
   padding: 1em;
   border-radius: 0.5em;
   margin: 0.5em;
   @media (max-width: 480px) {
-    width: 15em;
+    width: ${props => props.width || '15em'};
   }
 
   @media (min-width: 480px) {
-    width: 20em;
+    width: ${props => props.width || '20em'};
   }
 
   width: 20em;
@@ -152,7 +149,6 @@ export const ListItem = styled.div`
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 `
 
 export const Text = styled.p`
