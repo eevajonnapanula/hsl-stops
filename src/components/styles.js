@@ -35,6 +35,14 @@ export const StyledInput = styled.input.attrs({
   padding: 1em;
   border-radius: 0.5em;
   margin: 0.5em;
+  @media (max-width: 480px) {
+    width: 15em;
+  }
+
+  @media (min-width: 480px) {
+    width: 20em;
+  }
+
   width: 20em;
 `
 
@@ -72,6 +80,11 @@ export const ColoredIcon = styled.span`
   color: ${props => props.color};
   padding-right: 0.5em;
 `
+
+export const Icon = styled.span`
+  font-size: ${props => props.size || '1em'};
+`
+
 export const Wrapper = styled.div`
   width: 100%;
   font-family: 'Roboto', sans-serif;
@@ -136,7 +149,7 @@ export const ListItem = styled.div`
     border-bottom: none;
   }
 `
-export const AddressSearchContainer = styled.div`
+export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,4 +157,11 @@ export const AddressSearchContainer = styled.div`
 
 export const Text = styled.p`
   padding: 1em;
+`
+
+export const SwipeMenuContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `
