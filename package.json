@@ -12,7 +12,7 @@
     "react-dom": "^16.7.0",
     "react-icons": "^3.2.2",
     "react-pose": "^4.0.4",
-    "react-scripts": "2.1.2",
+    "react-scripts": "3.0.1",
     "react-swipeable": "^4.3.1",
     "styled-components": "^4.1.3"
   },

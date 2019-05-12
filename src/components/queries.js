@@ -1,49 +1,48 @@
-export const stopsByName = (queryString) => (`
+import gql from "graphql-tag"
+
+export const stopsByName = queryString => gql`
   {
     stops(name: "${queryString}") {
-      name
-      gtfsId
-      vehicleMode
-      stoptimesWithoutPatterns(omitNonPickups:true) {
-        realtimeArrival
-        realtimeDeparture
-        realtimeArrival
-        realtime
-        serviceDay
-        headsign
-        trip {
-          routeShortName
-        }
-      }
+      ...StopFragment
     }
   }
-`)
 
-export const stopsByLocation = (coordinates) => (`
+  ${stopFragment}
+`
+
+export const stopsByLocation = coordinates => gql`
   {
-    stopsByRadius(lat:${coordinates.lat}, lon: ${coordinates.lon}, radius:${coordinates.radius}) {
+    stopsByRadius(lat:${coordinates.lat}, lon: ${coordinates.lon}, radius:${
+  coordinates.radius
+}) {
       edges {
         node {
           stop {
-            name
-            gtfsId
-            vehicleMode
-            stoptimesWithoutPatterns(omitNonPickups:true) {
-              realtimeArrival
-              realtimeDeparture
-              realtimeArrival
-              realtime
-              serviceDay
-              pickupType
-              headsign
-              trip {
-                routeShortName
-              }
-            }
+            ...StopFragment
           }
           distance
         }
       }
     }
   }
-`)
+
+  ${stopFragment}
+`
+
+const stopFragment = gql`
+  fragment StopFragment on Stop {
+    name
+    gtfsId
+    vehicleMode
+    stoptimesWithoutPatterns(omitNonPickups: true) {
+      realtimeDeparture
+      realtimeArrival
+      realtime
+      serviceDay
+      headsign
+      trip {
+        routeShortName
+      }
+    }
+  }
+`

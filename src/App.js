@@ -1,57 +1,59 @@
-import React, { Component } from 'react';
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
-import StopsByName from './components/stops-by-name';
-import StopsByLocation from './components/stops-by-location';
-import { Wrapper } from './components/styles';
-import SwipeMenu from './components/swipe-menu';
+import React, { useState } from 'react'
+import ApolloClient from "apollo-boost"
+import { ApolloProvider } from "react-apollo"
+import StopsByName from './components/stops-by-name'
+import StopsByLocation from './components/stops-by-location'
+import { Wrapper } from './components/styles'
+import SwipeMenu from './components/swipe-menu'
 
 const client = new ApolloClient({
   uri: "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql"
-});
+})
 
-class App extends Component {
-  state = {
-    queryString: '',
-    coordinates: {
-      lat: 60.170,
-      lon: 24.936,
-      radius: 500,
-    },
-    isLocation: false
+const App = () => {
+  const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'))
+
+  console.log(storedCoordinates)
+
+  const defaultCoordinates =  {
+    lat: storedCoordinates ? storedCoordinates.lat : 60.170,
+    lon: storedCoordinates ? storedCoordinates.lon : 24.936,
+    radius: storedCoordinates ? storedCoordinates.radius : 500,
   }
 
-  handleInputChange = (changed) => {
+  const [ queryString, setQueryString ] = useState('')
+  const [ coordinates, setCoordinates ] = useState(defaultCoordinates)
+  const [ isLocation, setIsLocation ] = useState(false)
+
+  const handleInputChange = (changed) => {
     if (changed.length > 2) {
-      this.setState({
-        queryString: changed,
-        isLocation: false
-      })
+      setQueryString(changed)
+      setIsLocation(false)
     }
   }
 
-  handleAddressChange = (input) => {
-    this.setState({
-      isLocation: true,
-      coordinates: {
-        lat: input.lat,
-        lon: input.lon,
-        radius: input.radius
-      }
-    })
+  const handleAddressChange = (input) => {
+    const newCoordinates = {
+      lat: input.lat,
+      lon: input.lon,
+      radius: input.radius
+    }
+    setIsLocation(true)
+    setCoordinates(newCoordinates)
+    localStorage.setItem('coordinates', JSON.stringify(newCoordinates))
   }
-
-  render() {
+  
     return (
       <ApolloProvider client={client}>
         <Wrapper>
-          <SwipeMenu handleAddressChange={this.handleAddressChange} handleInputChange={this.handleInputChange} />
-          {this.state.isLocation ?
-            <StopsByLocation coordinates={this.state.coordinates} /> :
-            <StopsByName queryString={this.state.queryString} /> }
+          {console.log('coordinates', coordinates)}
+          <SwipeMenu handleAddressChange={handleAddressChange} handleInputChange={handleInputChange} />
+          {isLocation ?
+            <StopsByLocation coordinates={coordinates} /> :
+            <StopsByName queryString={queryString} /> }
         </Wrapper>
       </ApolloProvider>
-    )}
+    )
 }
 
-export default App;
+export default App

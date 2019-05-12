@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components'
-import posed from 'react-pose';
+import posed from 'react-pose'
 
 const changeColor = keyframes`
   0% {
@@ -13,7 +13,7 @@ const changeColor = keyframes`
   100% {
     color: rgb(255,255,255);
   }
-`;
+`
 
 export const RowDiv = styled.div`
   display: flex;

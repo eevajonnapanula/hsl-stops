@@ -1,23 +1,20 @@
-import React from 'react';
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import Stop from './stop';
-import { ColumnDiv, Text } from './styles';
-import { stopsByLocation } from './queries';
+import React from 'react'
+import { Query } from "react-apollo"
+import Stop from './stop'
+import { ColumnDiv, Text } from './styles'
+import { stopsByLocation } from './queries'
 
 
 const StopsByName = ({coordinates}) => {
-  const query = stopsByLocation(coordinates);
+  const query = stopsByLocation(coordinates)
   return (
   <Query
-    query={gql`
-      ${query}
-    `}
+    query={query}
     pollInterval={15000}
   >
     {({ loading, error, data }) => {
-      if (loading) return <Text>Loading...</Text>;
-      if (error) return <Text>Error :(</Text>;
+      if (loading) return <Text>Loading...</Text>
+      if (error) return <Text>Error :(</Text>
       return (
         <ColumnDiv>
           {data.stopsByRadius.edges.length > 0 ?
@@ -32,9 +29,9 @@ const StopsByName = ({coordinates}) => {
               No results found :(
             </Text>
           }
-        </ColumnDiv>);
+        </ColumnDiv>)
     }}
   </Query>
-)};
+)}
 
-export default StopsByName;
+export default StopsByName

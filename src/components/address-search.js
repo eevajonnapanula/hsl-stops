@@ -1,59 +1,65 @@
-import React from 'react';
-import { StyledInput } from './styles';
-import { getJSON } from './networking';
-import { ListContainer, ListItem, SearchContainer } from './styles';
+import React, { useState, useEffect } from 'react'
+import { StyledInput } from './styles'
+import { getJSON } from './networking'
+import { ListContainer, ListItem, SearchContainer } from './styles'
 
-class AddressSearch extends React.Component {
-  state = {
-    suggestions: [],
-    queryString: '',
-    radius: 500,
-    pose: 'closed'
+const AddressSearch = ({ handleChange }) => {
+  const [ suggestions, setSuggestions ] = useState([])
+  const [ queryString, setQueryString ] = useState('')
+  const [ radius, setRadius ] = useState(500)
+  const [ search, setSearch ] = useState('')
+  const [ pose, setPose ] = useState('closed') 
+
+  
+
+  useEffect(() => {
+    const handleAddressChange = async () => {
+      if (search.length > 2) {
+      const url = `https://api.digitransit.fi/geocoding/v1/autocomplete?text=${search}&focus.point.lat=60.17&focus.point.lon=24.93`
+      const res = await getJSON(url)
+
+      setSuggestions(res.features)
+      setPose('open')
+      }
   }
+    handleAddressChange()
+  }, [search])
 
-  handleAddressChange = async () => {
-    if (this.state.queryString.length > 2) {
-      const url = `https://api.digitransit.fi/geocoding/v1/autocomplete?text=${this.state.queryString}&focus.point.lat=60.17&focus.point.lon=24.93`;
-      const res = await getJSON(url);
 
-      this.setState({
-        suggestions: res.features,
-        pose: 'open'
-      })
-    }
-  }
 
-  handleChange = (key, value) => {
-    this.setState({
-      [key]: value,
-    })
-  }
-
-  handleKeyPress = (e) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      this.setState({pose: 'closed'})
-      this.handleAddressChange()
+      setPose('closed')
+      setSearch(queryString)
     }
   }
 
-  handleClick = (suggestion) => {
-    this.props.handleChange({
+  const handleInputChange = e => {
+    setQueryString(e.target.value)
+    if (e.target.value.length > 2) {
+      setSearch(e.target.value)
+    }
+  }
+
+  const handleClick = suggestion => {
+    handleChange({
       lon: suggestion.geometry.coordinates[0],
       lat: suggestion.geometry.coordinates[1],
-      radius: this.state.radius
+      radius: radius
     })
-    this.setState({suggestions: [], queryString: '', pose: 'closed'})
+    setPose('closed')
+    setSuggestions([])
+    setQueryString('')
   }
 
-  render() {
-    return (
-      <SearchContainer>
+  return (
+    <SearchContainer>
         <h5>Search by address</h5>
         <StyledInput
-          value={this.state.queryString}
-          onChange={(e) => this.handleChange('queryString', e.target.value)}
+          value={queryString}
+          onChange={handleInputChange}
           placeholder="Type an address"
-          onKeyPress={(e) => this.handleKeyPress(e)}
+          onKeyPress={handleKeyPress}
         />
       <div>
         <span>Change radius</span>
@@ -61,25 +67,26 @@ class AddressSearch extends React.Component {
           placeholder="500"
           width="5em"
           type="number"
-          value={this.state.radius}
-          onChange={(e) => this.handleChange('radius', e.target.value)}
-          onKeyPress={(e) => this.handleKeyPress(e)}
+          value={radius}
+          onChange={(e) => setRadius(e.target.value)}
+          onKeyPress={handleKeyPress}
           />
         <span>m</span>
       </div>
-        <ListContainer visible={this.state.suggestions.length > 0} pose={this.state.pose}>
-          { this.state.suggestions.map(suggestion => (
+        <ListContainer visible={suggestions.length > 0} pose={pose}>
+          { suggestions.map(suggestion => (
               <ListItem
                 key={suggestion.properties.id}
-                onClick={() => this.handleClick(suggestion)}>
+                onClick={() => handleClick(suggestion)}>
                 {suggestion.properties.label}
               </ListItem>
             )
           )}
         </ListContainer>
       </SearchContainer>
-    )
-  }
+  )
+
 }
 
-export default AddressSearch;
+
+export default AddressSearch
