@@ -13,8 +13,6 @@ const client = new ApolloClient({
 const App = () => {
   const storedCoordinates = JSON.parse(localStorage.getItem('coordinates'))
 
-  console.log(storedCoordinates)
-
   const defaultCoordinates =  {
     lat: storedCoordinates ? storedCoordinates.lat : 60.170,
     lon: storedCoordinates ? storedCoordinates.lon : 24.936,
@@ -46,7 +44,6 @@ const App = () => {
     return (
       <ApolloProvider client={client}>
         <Wrapper>
-          {console.log('coordinates', coordinates)}
           <SwipeMenu handleAddressChange={handleAddressChange} handleInputChange={handleInputChange} />
           {isLocation ?
             <StopsByLocation coordinates={coordinates} /> :

@@ -156,6 +156,7 @@ export const ListItem = styled(Item)`
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `
 
 export const Text = styled.p`
