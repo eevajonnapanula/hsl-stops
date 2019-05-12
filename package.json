@@ -2,6 +2,7 @@
   "name": "hsl-stops",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://eevajonnapanula.github.io/hsl-stops",
   "dependencies": {
     "apollo-boost": "^0.1.23",
     "graphql": "^14.0.2",
@@ -19,9 +20,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build && netlify deploy --prod",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
