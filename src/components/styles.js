@@ -168,4 +168,5 @@ export const SwipeMenuContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 10em;
 `
