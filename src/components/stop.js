@@ -1,9 +1,9 @@
-import React from 'react';
-import moment from 'moment';
-import { Stoptime, ColoredIcon, Header, StopTimesWrapper, Headsign, StopWrapper } from './styles';
-import { H2 } from './typography';
-import { FaTrain, FaBus, FaSubway, FaCat, FaShip } from 'react-icons/fa';
-import TimeWrapper from './time';
+import React from 'react'
+import moment from 'moment'
+import { Stoptime, ColoredIcon, Header, StopTimesWrapper, Headsign, StopWrapper } from './styles'
+import { H2 } from './typography'
+import { FaTrain, FaBus, FaSubway, FaCat, FaShip } from 'react-icons/fa'
+import TimeWrapper from './time'
 
 const mapping = {
   'FERRY': {
@@ -26,10 +26,14 @@ const mapping = {
     component: <FaCat />,
   color: 'rgba(0,152,95,1)'
   },
+  null: {
+    component: <FaShip />,
+  color: 'rgba(0,185,228,1)'
+},
 }
 
 const getTimeInMinutes = (stoptime) => {
-  return moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).diff(moment(), 'minutes');
+  return moment.unix(stoptime.serviceDay + stoptime.realtimeArrival).diff(moment(), 'minutes')
 }
 
 const getFormattedTime = (stoptime) => {
@@ -60,6 +64,6 @@ const Stop = ({stop, distance}) => (
       ))}
     </StopTimesWrapper>
   </StopWrapper>
-);
+)
 
-export default Stop;
+export default Stop
