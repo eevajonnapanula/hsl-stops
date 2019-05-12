@@ -20,7 +20,7 @@ export const RowDiv = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `
-export const ColumnDiv = styled.div`
+export const ColumnDiv = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,7 +125,7 @@ const List = posed.div({
 })
 
 export const ListContainer = styled(List)`
-  display: ${props => props.visible ? 'flex' : 'none'};
+  display: 'flex';
   flex-direction: column;
   align-items: center;
   border: 1px solid black;
@@ -157,16 +157,16 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 10em;
 `
 
 export const Text = styled.p`
   padding: 1em;
 `
 
-export const SwipeMenuContainer = styled.div`
+export const SwipeMenuContainer = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 10em;
 `
